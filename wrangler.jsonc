@@ -2,6 +2,11 @@
   "name": "nakshatra-order-tracking",
   "main": "./worker.js",
   "compatibility_date": "2026-11-16",
+
+  "vars": {
+    "APPS_SCRIPT_URL": "PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE"
+  },
+
   "assets": {
     "directory": "./",
     "binding": "ASSETS",
