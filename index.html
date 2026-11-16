@@ -41,7 +41,7 @@
 
     main {
       max-width: 650px;
-      margin: 45px auto;
+      margin: 40px auto;
       padding: 0 18px;
     }
 
@@ -50,6 +50,7 @@
       padding: 28px 22px;
       border-radius: 15px;
       box-shadow: 0 5px 25px rgba(0,0,0,.05);
+      margin-bottom: 20px;
     }
 
     h2 {
@@ -78,15 +79,17 @@
       border-radius: 9px;
       font-size: 15px;
       outline: none;
+      margin-bottom: 17px;
     }
 
     input:focus {
       border-color: #8c3655;
     }
 
-    button {
+    button, .shipment-button {
+      display: block;
       width: 100%;
-      margin-top: 15px;
+      margin-top: 5px;
       padding: 15px;
       border: none;
       border-radius: 9px;
@@ -94,6 +97,8 @@
       color: white;
       font-size: 15px;
       font-weight: bold;
+      text-align: center;
+      text-decoration: none;
       cursor: pointer;
     }
 
@@ -102,77 +107,638 @@
       cursor: wait;
     }
 
+    .message {
+      display: none;
+      padding: 13px;
+      border-radius: 9px;
+      margin-top: 17px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .error {
+      display: block;
+      background: #fff0f0;
+      color: #a32626;
+    }
+
+    .success {
+      display: block;
+      background: #edf8ef;
+      color: #26713a;
+    }
+
+    #results {
+      display: none;
+    }
+
+    .order-header {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 17px;
+      margin-bottom: 18px;
+    }
+
+    .order-id {
+      color: #8c3655;
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 7px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+      margin-bottom: 20px;
+    }
+
+    .detail-box {
+      background: #f8f5f6;
+      border-radius: 9px;
+      padding: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .detail-label {
+      color: #888;
+      font-size: 11px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    .detail-value {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 16px;
+      margin: 22px 0 14px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background: #f5e8ed;
+      color: #58172d;
+      border-radius: 20px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .book-item {
+      border-bottom: 1px solid #eee;
+      padding: 13px 0;
+    }
+
+    .book-item:last-child {
+      border-bottom: none;
+    }
+
+    .book-title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .book-meta {
+      color: #888;
+      font-size: 12px;
+      margin-top: 5px;
+      line-height: 1.5;
+    }
+
+    .timeline {
+      margin-top: 12px;
+      padding-left: 8px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 22px 24px;
+      border-left: 2px solid #e7dce0;
+    }
+
+    .timeline-item:last-child {
+      border-left-color: transparent;
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -7px;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #8c3655;
+      border: 2px solid white;
+      box-shadow: 0 0 0 1px #8c3655;
+    }
+
+    .timeline-status {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .timeline-date {
+      font-size: 11px;
+      color: #999;
+      margin-top: 5px;
+    }
+
+    .timeline-remark {
+      font-size: 12px;
+      color: #666;
+      margin-top: 7px;
+      line-height: 1.5;
+    }
+
+    .total-box {
+      background: #f8f5f6;
+      padding: 16px;
+      border-radius: 10px;
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+
+    .shipment-button {
+      background: #287747;
+      margin-top: 18px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
     footer {
       text-align: center;
       padding: 25px 15px;
       color: #888;
       font-size: 12px;
     }
+
+    @media(max-width: 420px) {
+      main {
+        margin-top: 25px;
+      }
+
+      .card {
+        padding: 23px 17px;
+      }
+
+      .details-grid {
+        gap: 9px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>NAKSHATRA PUBLISHERS</h1>
-    <p>Official Order Tracking Portal</p>
-  </header>
+<header>
+  <h1>NAKSHATRA PUBLISHERS</h1>
+  <p>Official Order Tracking Portal</p>
+</header>
 
-  <main>
-    <section class="card">
-      <h2>Track Your Order</h2>
+<main>
 
-      <p class="description">
-        Enter your Order ID to check the latest status
-        and follow your order journey.
-      </p>
+  <section class="card">
+    <h2>Track Your Order</h2>
 
-      <form id="trackingForm">
-        <label for="orderId">ORDER ID</label>
+    <p class="description">
+      Check your order status and follow its journey
+      from confirmation to delivery.
+    </p>
+
+    <form id="trackingForm">
+
+      <label for="orderId">ORDER ID</label>
+
+      <input
+        type="text"
+        id="orderId"
+        placeholder="e.g. NKORD20260001"
+        autocomplete="off"
+        required
+      >
+
+      <div id="tokenContainer">
+        <label for="trackingToken">TRACKING TOKEN</label>
 
         <input
-          type="text"
-          id="orderId"
-          placeholder="e.g. NKORD20260001"
+          type="password"
+          id="trackingToken"
+          placeholder="Enter your tracking token"
           autocomplete="off"
           required
         >
+      </div>
 
-        <button type="submit" id="trackButton">
-          TRACK ORDER →
-        </button>
-      </form>
-    </section>
-  </main>
+      <button type="submit" id="trackButton">
+        TRACK ORDER →
+      </button>
 
-  <footer>
-    © Nakshatra Publishers. All rights reserved.
-  </footer>
+    </form>
 
-  <script>
-    const params = new URLSearchParams(
-      window.location.search
-    );
+    <div id="message" class="message" role="alert"></div>
 
-    const orderId = params.get('order_id');
+  </section>
 
-    if (orderId) {
-      document.getElementById('orderId').value =
-        orderId;
+
+  <section id="results">
+
+    <div class="card">
+
+      <div class="order-header">
+        <h2>Order Details</h2>
+        <div class="order-id" id="resultOrderId"></div>
+      </div>
+
+      <div class="details-grid">
+
+        <div class="detail-box">
+          <div class="detail-label">Customer</div>
+          <div class="detail-value" id="customerName">—</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Order Date</div>
+          <div class="detail-value" id="orderDate">—</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Payment Status</div>
+          <div class="detail-value" id="paymentStatus">—</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Order Status</div>
+          <div class="detail-value">
+            <span class="status-badge" id="orderStatus">—</span>
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="section-title">Ordered Books</h3>
+
+      <div id="bookList"></div>
+
+      <div class="total-box">
+        <span>Total Amount</span>
+        <span id="totalAmount">—</span>
+      </div>
+
+      <div id="shipmentContainer"></div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3 class="section-title" style="margin-top:0">
+        Order Journey
+      </h3>
+
+      <div id="timeline" class="timeline"></div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+  © Nakshatra Publishers. All rights reserved.
+</footer>
+
+
+<script>
+
+  const params = new URLSearchParams(
+    window.location.search
+  );
+
+  const orderInput = document.getElementById('orderId');
+  const tokenInput = document.getElementById('trackingToken');
+  const tokenContainer = document.getElementById('tokenContainer');
+
+  const messageBox = document.getElementById('message');
+  const results = document.getElementById('results');
+  const trackButton = document.getElementById('trackButton');
+
+  // Read secure tracking link parameters.
+
+  const urlOrderId = params.get('order_id');
+  const urlToken = params.get('token');
+
+  if (urlOrderId) {
+    orderInput.value = urlOrderId;
+  }
+
+  if (urlToken) {
+    tokenInput.value = urlToken;
+    tokenContainer.classList.add('hidden');
+    tokenInput.required = false;
+  }
+
+
+  // Formatting helpers.
+
+  function safeText(value) {
+    return value === null || value === undefined || value === ''
+      ? '—'
+      : String(value);
+  }
+
+
+  function formatDate(value) {
+    if (!value) return '—';
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) {
+      return String(value);
     }
 
+    return date.toLocaleString('en-IN', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+
+  function formatMoney(value) {
+    if (value === null || value === undefined || value === '') {
+      return '—';
+    }
+
+    return Number(value).toLocaleString('en-IN', {
+      style: 'currency',
+      currency: 'INR'
+    });
+  }
+
+
+  function addTextElement(parent, className, value) {
+    const element = document.createElement('div');
+
+    if (className) {
+      element.className = className;
+    }
+
+    element.textContent = safeText(value);
+
+    parent.appendChild(element);
+
+    return element;
+  }
+
+
+  // Display API errors.
+
+  function showMessage(text, type) {
+    messageBox.textContent = text;
+    messageBox.className = 'message ' + type;
+  }
+
+
+  // Render order information.
+
+  function renderOrder(response) {
+
+    const data = response.data || response;
+
+    const order = data.order || data;
+
+    document.getElementById('resultOrderId').textContent =
+      safeText(order.order_id);
+
+    document.getElementById('customerName').textContent =
+      safeText(order.customer_name);
+
+    document.getElementById('orderDate').textContent =
+      formatDate(order.created_at);
+
+    document.getElementById('paymentStatus').textContent =
+      safeText(order.payment_status);
+
+    document.getElementById('orderStatus').textContent =
+      safeText(order.order_status);
+
+    document.getElementById('totalAmount').textContent =
+      formatMoney(order.total_amount);
+
+
+    // Books.
+
+    const bookList = document.getElementById('bookList');
+
+    bookList.replaceChildren();
+
+    (data.items || order.items || []).forEach(item => {
+
+      const book = document.createElement('div');
+      book.className = 'book-item';
+
+      addTextElement(
+        book,
+        'book-title',
+        item.book_title || item.title
+      );
+
+      addTextElement(
+        book,
+        'book-meta',
+        'Author: ' + safeText(item.author) +
+        ' | Quantity: ' + safeText(item.quantity) +
+        ' | Amount: ' + formatMoney(item.line_total)
+      );
+
+      bookList.appendChild(book);
+
+    });
+
+
+    if (!bookList.children.length) {
+      addTextElement(bookList, 'book-meta', 'No book details available.');
+    }
+
+
+    // Shipment tracking.
+
+    const shipmentContainer =
+      document.getElementById('shipmentContainer');
+
+    shipmentContainer.replaceChildren();
+
+    if (order.tracking_url) {
+
+      const link = document.createElement('a');
+
+      link.href = order.tracking_url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.className = 'shipment-button';
+      link.textContent = 'TRACK SHIPMENT →';
+
+      shipmentContainer.appendChild(link);
+
+    }
+
+
+    // Public order history.
+
+    const timeline = document.getElementById('timeline');
+
+    timeline.replaceChildren();
+
+    const history = data.history || order.history || [];
+
+    history.forEach(event => {
+
+      const item = document.createElement('div');
+      item.className = 'timeline-item';
+
+      const dot = document.createElement('div');
+      dot.className = 'timeline-dot';
+
+      item.appendChild(dot);
+
+      addTextElement(
+        item,
+        'timeline-status',
+        event.new_status
+      );
+
+      addTextElement(
+        item,
+        'timeline-date',
+        formatDate(event.changed_at)
+      );
+
+      if (event.remark) {
+        addTextElement(
+          item,
+          'timeline-remark',
+          event.remark
+        );
+      }
+
+      timeline.appendChild(item);
+
+    });
+
+
+    if (!timeline.children.length) {
+      addTextElement(
+        timeline,
+        'timeline-remark',
+        'No public status updates available yet.'
+      );
+    }
+
+    results.style.display = 'block';
+
+  }
+
+
+  // Submit tracking request.
+
+  document.getElementById('trackingForm')
+    .addEventListener('submit', async function(event) {
+
+      event.preventDefault();
+
+      const order_id = orderInput.value.trim();
+
+      const token = tokenInput.value.trim();
+
+      if (!order_id || !token) {
+        showMessage(
+          'Please provide your Order ID and tracking token.',
+          'error'
+        );
+        return;
+      }
+
+      trackButton.disabled = true;
+      trackButton.textContent = 'CHECKING ORDER...';
+
+      results.style.display = 'none';
+      messageBox.className = 'message';
+
+      try {
+
+        const response = await fetch('/api/track', {
+          method: 'POST',
+
+          headers: {
+            'Content-Type': 'application/json'
+          },
+
+          body: JSON.stringify({
+            order_id,
+            token
+          })
+
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(
+            result.message ||
+            'Unable to retrieve your order.'
+          );
+        }
+
+        renderOrder(result);
+
+        showMessage(
+          'Your order information has been retrieved successfully.',
+          'success'
+        );
+
+      } catch (error) {
+
+        showMessage(
+          error.message ||
+          'Unable to connect to the tracking service. Please try again.',
+          'error'
+        );
+
+      } finally {
+
+        trackButton.disabled = false;
+        trackButton.textContent = 'TRACK ORDER →';
+
+      }
+
+    });
+
+
+  // Automatically track when opened through a secure email link.
+
+  if (urlOrderId && urlToken) {
+
     document.getElementById('trackingForm')
-      .addEventListener('submit', function(event) {
-        event.preventDefault();
+      .dispatchEvent(
+        new Event('submit', {
+          bubbles: true,
+          cancelable: true
+        })
+      );
 
-        const id = document.getElementById('orderId')
-          .value.trim();
+  }
 
-        if (!id) return;
-
-        alert('Tracking API will be connected in the next development step.');
-      });
-  </script>
+</script>
 
 </body>
 </html>
