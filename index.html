@@ -268,10 +268,6 @@
       margin-top: 18px;
     }
 
-    .hidden {
-      display: none !important;
-    }
-
     footer {
       text-align: center;
       padding: 25px 15px;
@@ -305,6 +301,7 @@
 <main>
 
   <section class="card">
+
     <h2>Track Your Order</h2>
 
     <p class="description">
@@ -324,18 +321,6 @@
         required
       >
 
-      <div id="tokenContainer">
-        <label for="trackingToken">TRACKING TOKEN</label>
-
-        <input
-          type="password"
-          id="trackingToken"
-          placeholder="Enter your tracking token"
-          autocomplete="off"
-          required
-        >
-      </div>
-
       <button type="submit" id="trackButton">
         TRACK ORDER →
       </button>
@@ -352,8 +337,11 @@
     <div class="card">
 
       <div class="order-header">
+
         <h2>Order Details</h2>
+
         <div class="order-id" id="resultOrderId"></div>
+
       </div>
 
       <div class="details-grid">
@@ -423,30 +411,19 @@
   );
 
   const orderInput = document.getElementById('orderId');
-  const tokenInput = document.getElementById('trackingToken');
-  const tokenContainer = document.getElementById('tokenContainer');
 
   const messageBox = document.getElementById('message');
+
   const results = document.getElementById('results');
+
   const trackButton = document.getElementById('trackButton');
 
-  // Read secure tracking link parameters.
-
   const urlOrderId = params.get('order_id');
-  const urlToken = params.get('token');
 
   if (urlOrderId) {
     orderInput.value = urlOrderId;
   }
 
-  if (urlToken) {
-    tokenInput.value = urlToken;
-    tokenContainer.classList.add('hidden');
-    tokenInput.required = false;
-  }
-
-
-  // Formatting helpers.
 
   function safeText(value) {
     return value === null || value === undefined || value === ''
@@ -456,6 +433,7 @@
 
 
   function formatDate(value) {
+
     if (!value) return '—';
 
     const date = new Date(value);
@@ -471,10 +449,12 @@
       hour: '2-digit',
       minute: '2-digit'
     });
+
   }
 
 
   function formatMoney(value) {
+
     if (value === null || value === undefined || value === '') {
       return '—';
     }
@@ -483,10 +463,12 @@
       style: 'currency',
       currency: 'INR'
     });
+
   }
 
 
   function addTextElement(parent, className, value) {
+
     const element = document.createElement('div');
 
     if (className) {
@@ -498,18 +480,18 @@
     parent.appendChild(element);
 
     return element;
+
   }
 
-
-  // Display API errors.
 
   function showMessage(text, type) {
+
     messageBox.textContent = text;
+
     messageBox.className = 'message ' + type;
+
   }
 
-
-  // Render order information.
 
   function renderOrder(response) {
 
@@ -536,7 +518,7 @@
       formatMoney(order.total_amount);
 
 
-    // Books.
+    // Ordered books.
 
     const bookList = document.getElementById('bookList');
 
@@ -545,6 +527,7 @@
     (data.items || order.items || []).forEach(item => {
 
       const book = document.createElement('div');
+
       book.className = 'book-item';
 
       addTextElement(
@@ -567,7 +550,13 @@
 
 
     if (!bookList.children.length) {
-      addTextElement(bookList, 'book-meta', 'No book details available.');
+
+      addTextElement(
+        bookList,
+        'book-meta',
+        'No book details available.'
+      );
+
     }
 
 
@@ -583,9 +572,13 @@
       const link = document.createElement('a');
 
       link.href = order.tracking_url;
+
       link.target = '_blank';
+
       link.rel = 'noopener noreferrer';
+
       link.className = 'shipment-button';
+
       link.textContent = 'TRACK SHIPMENT →';
 
       shipmentContainer.appendChild(link);
@@ -604,9 +597,11 @@
     history.forEach(event => {
 
       const item = document.createElement('div');
+
       item.className = 'timeline-item';
 
       const dot = document.createElement('div');
+
       dot.className = 'timeline-dot';
 
       item.appendChild(dot);
@@ -624,11 +619,13 @@
       );
 
       if (event.remark) {
+
         addTextElement(
           item,
           'timeline-remark',
           event.remark
         );
+
       }
 
       timeline.appendChild(item);
@@ -637,11 +634,13 @@
 
 
     if (!timeline.children.length) {
+
       addTextElement(
         timeline,
         'timeline-remark',
         'No public status updates available yet.'
       );
+
     }
 
     results.style.display = 'block';
@@ -649,92 +648,100 @@
   }
 
 
-  // Submit tracking request.
+  // Order ID-only tracking request.
+
+  async function trackOrder(orderId) {
+
+    trackButton.disabled = true;
+
+    trackButton.textContent = 'CHECKING ORDER...';
+
+    results.style.display = 'none';
+
+    messageBox.className = 'message';
+
+    try {
+
+      const response = await fetch('/api/track', {
+
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify({
+          action: 'track',
+          order_id: orderId
+        })
+
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+
+        throw new Error(
+          result.message ||
+          'Unable to retrieve your order.'
+        );
+
+      }
+
+      renderOrder(result);
+
+      showMessage(
+        'Your order information has been retrieved successfully.',
+        'success'
+      );
+
+    } catch (error) {
+
+      showMessage(
+        error.message ||
+        'Unable to connect to the tracking service. Please try again.',
+        'error'
+      );
+
+    } finally {
+
+      trackButton.disabled = false;
+
+      trackButton.textContent = 'TRACK ORDER →';
+
+    }
+
+  }
+
 
   document.getElementById('trackingForm')
-    .addEventListener('submit', async function(event) {
+    .addEventListener('submit', function(event) {
 
       event.preventDefault();
 
-      const order_id = orderInput.value.trim();
+      const orderId = orderInput.value.trim();
 
-      const token = tokenInput.value.trim();
+      if (!orderId) {
 
-      if (!order_id || !token) {
         showMessage(
-          'Please provide your Order ID and tracking token.',
+          'Please enter your Order ID.',
           'error'
         );
+
         return;
-      }
-
-      trackButton.disabled = true;
-      trackButton.textContent = 'CHECKING ORDER...';
-
-      results.style.display = 'none';
-      messageBox.className = 'message';
-
-      try {
-
-        const response = await fetch('/api/track', {
-          method: 'POST',
-
-          headers: {
-            'Content-Type': 'application/json'
-          },
-
-          body: JSON.stringify({
-            order_id,
-            token
-          })
-
-        });
-
-        const result = await response.json();
-
-        if (!response.ok || !result.success) {
-          throw new Error(
-            result.message ||
-            'Unable to retrieve your order.'
-          );
-        }
-
-        renderOrder(result);
-
-        showMessage(
-          'Your order information has been retrieved successfully.',
-          'success'
-        );
-
-      } catch (error) {
-
-        showMessage(
-          error.message ||
-          'Unable to connect to the tracking service. Please try again.',
-          'error'
-        );
-
-      } finally {
-
-        trackButton.disabled = false;
-        trackButton.textContent = 'TRACK ORDER →';
 
       }
+
+      trackOrder(orderId);
 
     });
 
 
-  // Automatically track when opened through a secure email link.
+  // Automatically track orders opened from email links.
 
-  if (urlOrderId && urlToken) {
+  if (urlOrderId) {
 
-    document.getElementById('trackingForm')
-      .dispatchEvent(
-        new Event('submit', {
-          bubbles: true,
-          cancelable: true
-        })
-      );
+    trackOrder(urlOrderId);
 
   }
 
