@@ -1,294 +1,513 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#58172d">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#58172d">
 
-  <title>Track Your Order | Nakshatra Publishers</title>
+<title>Track Your Order | Nakshatra Publishers</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+:root {
+  --maroon: #58172d;
+  --wine: #8c3655;
+  --cream: #f7f4f1;
+  --text: #29252a;
+  --muted: #858085;
+  --border: #eee8eb;
+  --green: #27834b;
+  --grey: #dcd7da;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f4f1;
-      color: #29252a;
-      min-height: 100vh;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    header {
-      background: #58172d;
-      color: white;
-      padding: 24px 20px;
-      text-align: center;
-    }
+body {
+  font-family: Arial, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+}
 
-    header h1 {
-      font-size: 23px;
-      letter-spacing: 1px;
-    }
+header {
+  background: var(--maroon);
+  color: white;
+  padding: 19px 15px;
+  text-align: center;
+}
 
-    header p {
-      margin-top: 7px;
-      color: #f0dce3;
-      font-size: 13px;
-    }
+header h1 {
+  font-size: 19px;
+  letter-spacing: 1px;
+}
 
-    main {
-      max-width: 650px;
-      margin: 40px auto;
-      padding: 0 18px;
-    }
+header p {
+  color: #f0dce3;
+  font-size: 11px;
+  margin-top: 5px;
+}
 
-    .card {
-      background: white;
-      padding: 28px 22px;
-      border-radius: 15px;
-      box-shadow: 0 5px 25px rgba(0,0,0,.05);
-      margin-bottom: 20px;
-    }
+main {
+  max-width: 650px;
+  margin: 22px auto;
+  padding: 0 14px;
+}
 
-    h2 {
-      font-size: 21px;
-      margin-bottom: 10px;
-    }
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 19px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 15px rgba(0,0,0,.035);
+}
 
-    .description {
-      color: #777;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
+.search-card {
+  padding: 19px;
+}
 
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 9px;
-    }
+.search-title {
+  font-size: 19px;
+  margin-bottom: 5px;
+}
 
-    input {
-      width: 100%;
-      padding: 15px;
-      border: 1px solid #ded9dc;
-      border-radius: 9px;
-      font-size: 15px;
-      outline: none;
-      margin-bottom: 17px;
-    }
+.description {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
 
-    input:focus {
-      border-color: #8c3655;
-    }
+label {
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
 
-    button, .shipment-button {
-      display: block;
-      width: 100%;
-      margin-top: 5px;
-      padding: 15px;
-      border: none;
-      border-radius: 9px;
-      background: #58172d;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-    }
+input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ded9dc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
 
-    button:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
+input:focus {
+  border-color: var(--wine);
+}
 
-    .message {
-      display: none;
-      padding: 13px;
-      border-radius: 9px;
-      margin-top: 17px;
-      font-size: 13px;
-      line-height: 1.5;
-    }
+button {
+  cursor: pointer;
+}
 
-    .error {
-      display: block;
-      background: #fff0f0;
-      color: #a32626;
-    }
+.primary-button {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background: var(--maroon);
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
 
-    .success {
-      display: block;
-      background: #edf8ef;
-      color: #26713a;
-    }
+.primary-button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
 
-    #results {
-      display: none;
-    }
+.message {
+  display: none;
+  padding: 10px 12px;
+  border-radius: 7px;
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
 
-    .order-header {
-      border-bottom: 1px solid #eee;
-      padding-bottom: 17px;
-      margin-bottom: 18px;
-    }
+.error {
+  display: block;
+  background: #fff0f0;
+  color: #a32626;
+}
 
-    .order-id {
-      color: #8c3655;
-      font-size: 14px;
-      font-weight: bold;
-      margin-top: 7px;
-    }
+/* RESULTS */
 
-    .details-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 13px;
-      margin-bottom: 20px;
-    }
+#results {
+  display: none;
+}
 
-    .detail-box {
-      background: #f8f5f6;
-      border-radius: 9px;
-      padding: 13px;
-      overflow-wrap: anywhere;
-    }
+/* HORIZONTAL PROGRESS */
 
-    .detail-label {
-      color: #888;
-      font-size: 11px;
-      margin-bottom: 7px;
-      text-transform: uppercase;
-    }
+.progress-card {
+  padding: 19px 15px 15px;
+  overflow: hidden;
+}
 
-    .detail-value {
-      font-size: 14px;
-      font-weight: bold;
-    }
+.progress-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
 
-    .section-title {
-      font-size: 16px;
-      margin: 22px 0 14px;
-    }
+.progress-heading h3 {
+  font-size: 14px;
+}
 
-    .status-badge {
-      display: inline-block;
-      background: #f5e8ed;
-      color: #58172d;
-      border-radius: 20px;
-      padding: 7px 12px;
-      font-size: 12px;
-      font-weight: bold;
-    }
+.progress-heading span {
+  font-size: 10px;
+  color: var(--muted);
+}
 
-    .book-item {
-      border-bottom: 1px solid #eee;
-      padding: 13px 0;
-    }
+.progress-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #d8c7ce transparent;
+  padding: 3px 0 12px;
+}
 
-    .book-item:last-child {
-      border-bottom: none;
-    }
+.progress-track {
+  display: flex;
+  align-items: flex-start;
+  min-width: max-content;
+  padding: 0 5px;
+}
 
-    .book-title {
-      font-size: 14px;
-      font-weight: bold;
-    }
+.progress-step {
+  width: 78px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
 
-    .book-meta {
-      color: #888;
-      font-size: 12px;
-      margin-top: 5px;
-      line-height: 1.5;
-    }
+.progress-connector {
+  height: 3px;
+  width: 38px;
+  margin-top: 12px;
+  border-radius: 5px;
+  background: var(--grey);
+  flex-shrink: 0;
+}
 
-    .timeline {
-      margin-top: 12px;
-      padding-left: 8px;
-    }
+.progress-connector.completed {
+  background: var(--green);
+}
 
-    .timeline-item {
-      position: relative;
-      padding: 0 0 22px 24px;
-      border-left: 2px solid #e7dce0;
-    }
+.progress-connector.current {
+  background: linear-gradient(
+    90deg,
+    var(--green),
+    var(--maroon)
+  );
+}
 
-    .timeline-item:last-child {
-      border-left-color: transparent;
-      padding-bottom: 0;
-    }
+.progress-dot {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  border: 2px solid var(--grey);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: white;
+  font-weight: bold;
+  z-index: 1;
+}
 
-    .timeline-dot {
-      position: absolute;
-      left: -7px;
-      top: 0;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #8c3655;
-      border: 2px solid white;
-      box-shadow: 0 0 0 1px #8c3655;
-    }
+.progress-dot.completed {
+  background: var(--green);
+  border-color: var(--green);
+}
 
-    .timeline-status {
-      font-size: 13px;
-      font-weight: bold;
-    }
+.progress-dot.current {
+  background: var(--maroon);
+  border-color: var(--maroon);
+  box-shadow: 0 0 0 4px #f3e7ec;
+}
 
-    .timeline-date {
-      font-size: 11px;
-      color: #999;
-      margin-top: 5px;
-    }
+.progress-label {
+  font-size: 9px;
+  line-height: 1.3;
+  color: #999;
+  margin-top: 8px;
+  max-width: 75px;
+  overflow-wrap: anywhere;
+}
 
-    .timeline-remark {
-      font-size: 12px;
-      color: #666;
-      margin-top: 7px;
-      line-height: 1.5;
-    }
+.progress-label.completed {
+  color: var(--green);
+  font-weight: bold;
+}
 
-    .total-box {
-      background: #f8f5f6;
-      padding: 16px;
-      border-radius: 10px;
-      margin-top: 18px;
-      display: flex;
-      justify-content: space-between;
-      font-weight: bold;
-    }
+.progress-label.current {
+  color: var(--maroon);
+  font-weight: bold;
+}
 
-    .shipment-button {
-      background: #287747;
-      margin-top: 18px;
-    }
+.progress-cancelled {
+  background: #fff0f0;
+  border: 1px solid #f3caca;
+  color: #a32626;
+  padding: 11px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
 
-    footer {
-      text-align: center;
-      padding: 25px 15px;
-      color: #888;
-      font-size: 12px;
-    }
+/* SHIPMENT BUTTON */
 
-    @media(max-width: 420px) {
-      main {
-        margin-top: 25px;
-      }
+.shipment-button {
+  display: none;
+  width: 100%;
+  margin-top: 14px;
+  padding: 13px;
+  background: #267747;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+}
 
-      .card {
-        padding: 23px 17px;
-      }
+/* COMPACT ORDER SUMMARY */
 
-      .details-grid {
-        gap: 9px;
-      }
-    }
-  </style>
+.summary-card {
+  padding: 17px;
+}
+
+.summary-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.summary-top h3 {
+  font-size: 15px;
+}
+
+.order-id {
+  color: var(--wine);
+  font-size: 11px;
+  font-weight: bold;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+
+.status-badge {
+  background: #f5e8ed;
+  color: var(--maroon);
+  border-radius: 20px;
+  padding: 6px 9px;
+  font-size: 9px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px 10px;
+}
+
+.summary-item {
+  min-width: 0;
+}
+
+.summary-label {
+  color: var(--muted);
+  font-size: 9px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  font-size: 12px;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.total-row strong {
+  color: var(--maroon);
+  font-size: 16px;
+}
+
+/* ORDERED BOOKS */
+
+.books-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.books-card summary {
+  list-style: none;
+  padding: 15px 17px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.books-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.books-card summary::after {
+  content: '+';
+  font-size: 18px;
+  color: var(--maroon);
+}
+
+.books-card[open] summary::after {
+  content: '−';
+}
+
+.book-list {
+  padding: 0 17px 10px;
+}
+
+.book-item {
+  padding: 11px 0;
+  border-top: 1px solid var(--border);
+}
+
+.book-title {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.book-meta {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* VERTICAL HISTORY */
+
+.history-card {
+  padding: 18px;
+}
+
+.section-heading {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.timeline {
+  padding-left: 7px;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 17px 22px;
+  border-left: 2px solid #e7dce0;
+}
+
+.timeline-item:last-child {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -6px;
+  top: 1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--wine);
+  border: 2px solid white;
+  box-shadow: 0 0 0 1px var(--wine);
+}
+
+.timeline-status {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.timeline-date {
+  font-size: 10px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.timeline-remark {
+  font-size: 11px;
+  color: #666;
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+.empty-history {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+footer {
+  text-align: center;
+  padding: 18px 12px;
+  color: #999;
+  font-size: 10px;
+}
+
+@media(max-width: 420px) {
+  main {
+    margin-top: 14px;
+    padding: 0 10px;
+  }
+
+  .card {
+    border-radius: 10px;
+  }
+
+  .progress-step {
+    width: 72px;
+  }
+
+  .progress-connector {
+    width: 30px;
+  }
+
+  .progress-label {
+    font-size: 8px;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -300,13 +519,14 @@
 
 <main>
 
-  <section class="card">
+  <!-- ORDER SEARCH -->
 
-    <h2>Track Your Order</h2>
+  <section class="card search-card">
+
+    <h2 class="search-title">Track Your Order</h2>
 
     <p class="description">
-      Check your order status and follow its journey
-      from confirmation to delivery.
+      Enter your Order ID to view the latest order status.
     </p>
 
     <form id="trackingForm">
@@ -316,83 +536,134 @@
       <input
         type="text"
         id="orderId"
-        placeholder="e.g. NKORD20260001"
+        placeholder="NKORD20260001"
         autocomplete="off"
         required
       >
 
-      <button type="submit" id="trackButton">
+      <button
+        type="submit"
+        class="primary-button"
+        id="trackButton"
+      >
         TRACK ORDER →
       </button>
 
     </form>
 
-    <div id="message" class="message" role="alert"></div>
+    <div
+      id="message"
+      class="message"
+      role="alert"
+      aria-live="polite"
+    ></div>
 
   </section>
 
 
+  <!-- TRACKING RESULTS -->
+
   <section id="results">
 
-    <div class="card">
+    <!-- HORIZONTAL PROGRESS + SHIPMENT -->
 
-      <div class="order-header">
+    <section class="card progress-card">
 
-        <h2>Order Details</h2>
+      <div class="progress-heading">
+        <h3>Order Progress</h3>
+        <span id="progressCaption">Live status</span>
+      </div>
 
-        <div class="order-id" id="resultOrderId"></div>
+      <div id="progressCancelled" class="progress-cancelled" hidden>
+        This order has been cancelled.
+      </div>
+
+      <div id="progressScroll" class="progress-scroll">
+        <div id="progressTrack" class="progress-track"></div>
+      </div>
+
+      <a
+        id="shipmentButton"
+        class="shipment-button"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ↗ TRACK SHIPMENT
+      </a>
+
+    </section>
+
+
+    <!-- COMPACT ORDER SUMMARY -->
+
+    <section class="card summary-card">
+
+      <div class="summary-top">
+
+        <div>
+          <h3>Order Summary</h3>
+          <div class="order-id" id="resultOrderId"></div>
+        </div>
+
+        <span class="status-badge" id="orderStatus">—</span>
 
       </div>
 
-      <div class="details-grid">
+      <div class="summary-grid">
 
-        <div class="detail-box">
-          <div class="detail-label">Customer</div>
-          <div class="detail-value" id="customerName">—</div>
+        <div class="summary-item">
+          <div class="summary-label">Customer</div>
+          <div class="summary-value" id="customerName">—</div>
         </div>
 
-        <div class="detail-box">
-          <div class="detail-label">Order Date</div>
-          <div class="detail-value" id="orderDate">—</div>
+        <div class="summary-item">
+          <div class="summary-label">Order Date</div>
+          <div class="summary-value" id="orderDate">—</div>
         </div>
 
-        <div class="detail-box">
-          <div class="detail-label">Payment Status</div>
-          <div class="detail-value" id="paymentStatus">—</div>
+        <div class="summary-item">
+          <div class="summary-label">Payment</div>
+          <div class="summary-value" id="paymentStatus">—</div>
         </div>
 
-        <div class="detail-box">
-          <div class="detail-label">Order Status</div>
-          <div class="detail-value">
-            <span class="status-badge" id="orderStatus">—</span>
-          </div>
+        <div class="summary-item">
+          <div class="summary-label">Books</div>
+          <div class="summary-value" id="bookCount">—</div>
         </div>
 
       </div>
 
-      <h3 class="section-title">Ordered Books</h3>
-
-      <div id="bookList"></div>
-
-      <div class="total-box">
+      <div class="total-row">
         <span>Total Amount</span>
-        <span id="totalAmount">—</span>
+        <strong id="totalAmount">—</strong>
       </div>
 
-      <div id="shipmentContainer"></div>
-
-    </div>
+    </section>
 
 
-    <div class="card">
+    <!-- COLLAPSIBLE BOOK DETAILS -->
 
-      <h3 class="section-title" style="margin-top:0">
-        Order Journey
-      </h3>
+    <details class="card books-card">
+
+      <summary>
+        Ordered Books <span id="bookSummaryCount"></span>
+      </summary>
+
+      <div id="bookList" class="book-list"></div>
+
+    </details>
+
+
+    <!-- VERTICAL ORDER HISTORY -->
+
+    <section class="card history-card">
+
+      <h3 class="section-heading">Order Activity</h3>
 
       <div id="timeline" class="timeline"></div>
 
-    </div>
+    </section>
 
   </section>
 
@@ -406,344 +677,729 @@
 
 <script>
 
-  const params = new URLSearchParams(
-    window.location.search
-  );
+/* =========================================================
+   1. ELEMENTS AND URL
+========================================================= */
 
-  const orderInput = document.getElementById('orderId');
+const params = new URLSearchParams(
+  window.location.search
+);
 
-  const messageBox = document.getElementById('message');
+const orderInput = document.getElementById('orderId');
+const messageBox = document.getElementById('message');
+const results = document.getElementById('results');
+const trackButton = document.getElementById('trackButton');
 
-  const results = document.getElementById('results');
+const urlOrderId = params.get('order_id');
 
-  const trackButton = document.getElementById('trackButton');
+if (urlOrderId) {
+  orderInput.value = urlOrderId;
+}
 
-  const urlOrderId = params.get('order_id');
 
-  if (urlOrderId) {
-    orderInput.value = urlOrderId;
+/* =========================================================
+   2. ORDER STATUS CONFIGURATION
+========================================================= */
+
+const IN_STOCK_STEPS = [
+  {
+    key: 'ORDER_RECEIVED',
+    label: 'Received'
+  },
+  {
+    key: 'PAYMENT_CONFIRMED',
+    label: 'Confirmed'
+  },
+  {
+    key: 'PROCESSING',
+    label: 'Processing'
+  },
+  {
+    key: 'READY_TO_SHIP',
+    label: 'Ready'
+  },
+  {
+    key: 'DISPATCHED',
+    label: 'Dispatched'
+  },
+  {
+    key: 'DELIVERED',
+    label: 'Delivered'
   }
+];
+
+const PRINT_STEPS = [
+  {
+    key: 'ORDER_RECEIVED',
+    label: 'Received'
+  },
+  {
+    key: 'PAYMENT_CONFIRMED',
+    label: 'Confirmed'
+  },
+  {
+    key: 'SENT_TO_PRESS',
+    label: 'Sent to Press'
+  },
+  {
+    key: 'PRINTING_IN_PROGRESS',
+    label: 'Printing'
+  },
+  {
+    key: 'RECEIVED_AT_NAKSHATRA',
+    label: 'Received'
+  },
+  {
+    key: 'READY_TO_SHIP',
+    label: 'Ready'
+  },
+  {
+    key: 'DISPATCHED',
+    label: 'Dispatched'
+  },
+  {
+    key: 'DELIVERED',
+    label: 'Delivered'
+  }
+];
 
 
-  function safeText(value) {
-    return value === null || value === undefined || value === ''
+/* =========================================================
+   3. FORMATTING HELPERS
+========================================================= */
+
+function safeText(value) {
+  return value === null ||
+    value === undefined ||
+    value === ''
       ? '—'
       : String(value);
+}
+
+
+function formatDate(value) {
+
+  if (!value) return '—';
+
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) {
+    return String(value);
   }
 
+  return date.toLocaleString('en-IN', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
 
-  function formatDate(value) {
+}
 
-    if (!value) return '—';
 
-    const date = new Date(value);
+function formatMoney(value) {
 
-    if (isNaN(date.getTime())) {
-      return String(value);
-    }
+  if (
+    value === null ||
+    value === undefined ||
+    value === ''
+  ) {
+    return '—';
+  }
 
-    return date.toLocaleString('en-IN', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  return Number(value).toLocaleString('en-IN', {
+    style: 'currency',
+    currency: 'INR'
+  });
+
+}
+
+
+function addTextElement(parent, className, value) {
+
+  const element = document.createElement('div');
+
+  if (className) {
+    element.className = className;
+  }
+
+  element.textContent = safeText(value);
+
+  parent.appendChild(element);
+
+  return element;
+
+}
+
+
+function showMessage(text, type) {
+
+  messageBox.textContent = text;
+
+  messageBox.className = 'message ' + type;
+
+}
+
+
+/* =========================================================
+   4. STATUS NORMALISATION
+========================================================= */
+
+function normaliseStatus(status) {
+
+  return String(status || '')
+    .trim()
+    .toUpperCase()
+    .replace(/[\s-]+/g, '_');
+
+}
+
+
+function getOrderSteps(data, order) {
+
+  const items = data.items || [];
+
+  const isPrintOrder = items.some(function(item) {
+
+    return normaliseStatus(item.fulfilment_type) ===
+      'PRINT_ON_DEMAND';
+
+  });
+
+  return isPrintOrder
+    ? PRINT_STEPS
+    : IN_STOCK_STEPS;
+
+}
+
+
+function getCurrentStepIndex(status, steps) {
+
+  const currentStatus = normaliseStatus(status);
+
+  if (
+    currentStatus === 'ORDER_RECEIVED' ||
+    currentStatus === 'PAYMENT_PENDING'
+  ) {
+    return 0;
+  }
+
+  if (currentStatus === 'PAYMENT_CONFIRMED') {
+    return 1;
+  }
+
+  const index = steps.findIndex(function(step) {
+    return step.key === currentStatus;
+  });
+
+  if (index !== -1) {
+    return index;
+  }
+
+  if (currentStatus === 'CANCELLED') {
+    return -1;
+  }
+
+  return 0;
+
+}
+
+
+/* =========================================================
+   5. HORIZONTAL PROGRESS TIMELINE
+========================================================= */
+
+function renderProgress(data, order) {
+
+  const track = document.getElementById('progressTrack');
+
+  const scroll = document.getElementById('progressScroll');
+
+  const cancelled = document.getElementById('progressCancelled');
+
+  const caption = document.getElementById('progressCaption');
+
+  const status = normaliseStatus(order.order_status);
+
+  track.replaceChildren();
+
+  const isCancelled = status === 'CANCELLED';
+
+  cancelled.hidden = !isCancelled;
+
+  scroll.style.display = isCancelled ? 'none' : 'block';
+
+  if (isCancelled) {
+
+    caption.textContent = 'Cancelled';
+
+    return;
 
   }
 
+  const steps = getOrderSteps(data, order);
 
-  function formatMoney(value) {
+  const currentIndex = getCurrentStepIndex(
+    status,
+    steps
+  );
 
-    if (value === null || value === undefined || value === '') {
-      return '—';
-    }
-
-    return Number(value).toLocaleString('en-IN', {
-      style: 'currency',
-      currency: 'INR'
-    });
-
-  }
+  caption.textContent =
+    currentIndex >= 0
+      ? steps[currentIndex].label
+      : 'Order progress';
 
 
-  function addTextElement(parent, className, value) {
+  steps.forEach(function(step, index) {
 
-    const element = document.createElement('div');
+    const isCompleted = index < currentIndex;
 
-    if (className) {
-      element.className = className;
-    }
+    const isCurrent = index === currentIndex;
 
-    element.textContent = safeText(value);
+    const stepElement = document.createElement('div');
 
-    parent.appendChild(element);
+    stepElement.className = 'progress-step';
 
-    return element;
+    const dot = document.createElement('div');
 
-  }
+    dot.className = 'progress-dot';
 
+    if (isCompleted) {
 
-  function showMessage(text, type) {
+      dot.classList.add('completed');
 
-    messageBox.textContent = text;
+      dot.textContent = '✓';
 
-    messageBox.className = 'message ' + type;
+    } else if (isCurrent) {
 
-  }
+      dot.classList.add('current');
 
+      dot.textContent = '•';
 
-  function renderOrder(response) {
+    } else {
 
-    const data = response.data || response;
-
-    const order = data.order || data;
-
-    document.getElementById('resultOrderId').textContent =
-      safeText(order.order_id);
-
-    document.getElementById('customerName').textContent =
-      safeText(order.customer_name);
-
-    document.getElementById('orderDate').textContent =
-      formatDate(order.created_at);
-
-    document.getElementById('paymentStatus').textContent =
-      safeText(order.payment_status);
-
-    document.getElementById('orderStatus').textContent =
-      safeText(order.order_status);
-
-    document.getElementById('totalAmount').textContent =
-      formatMoney(order.total_amount);
-
-
-    // Ordered books.
-
-    const bookList = document.getElementById('bookList');
-
-    bookList.replaceChildren();
-
-    (data.items || order.items || []).forEach(item => {
-
-      const book = document.createElement('div');
-
-      book.className = 'book-item';
-
-      addTextElement(
-        book,
-        'book-title',
-        item.book_title || item.title
-      );
-
-      addTextElement(
-        book,
-        'book-meta',
-        'Author: ' + safeText(item.author) +
-        ' | Quantity: ' + safeText(item.quantity) +
-        ' | Amount: ' + formatMoney(item.line_total)
-      );
-
-      bookList.appendChild(book);
-
-    });
-
-
-    if (!bookList.children.length) {
-
-      addTextElement(
-        bookList,
-        'book-meta',
-        'No book details available.'
-      );
+      dot.textContent = '';
 
     }
 
+    const label = document.createElement('div');
 
-    // Shipment tracking.
+    label.className = 'progress-label';
 
-    const shipmentContainer =
-      document.getElementById('shipmentContainer');
-
-    shipmentContainer.replaceChildren();
-
-    if (order.tracking_url) {
-
-      const link = document.createElement('a');
-
-      link.href = order.tracking_url;
-
-      link.target = '_blank';
-
-      link.rel = 'noopener noreferrer';
-
-      link.className = 'shipment-button';
-
-      link.textContent = 'TRACK SHIPMENT →';
-
-      shipmentContainer.appendChild(link);
-
+    if (isCompleted) {
+      label.classList.add('completed');
     }
 
+    if (isCurrent) {
+      label.classList.add('current');
+    }
 
-    // Public order history.
+    label.textContent = step.label;
 
-    const timeline = document.getElementById('timeline');
+    stepElement.appendChild(dot);
 
-    timeline.replaceChildren();
+    stepElement.appendChild(label);
 
-    const history = data.history || order.history || [];
+    track.appendChild(stepElement);
 
-    history.forEach(event => {
 
-      const item = document.createElement('div');
+    if (index < steps.length - 1) {
 
-      item.className = 'timeline-item';
+      const connector = document.createElement('div');
 
-      const dot = document.createElement('div');
+      connector.className = 'progress-connector';
 
-      dot.className = 'timeline-dot';
-
-      item.appendChild(dot);
-
-      addTextElement(
-        item,
-        'timeline-status',
-        event.new_status
-      );
-
-      addTextElement(
-        item,
-        'timeline-date',
-        formatDate(event.changed_at)
-      );
-
-      if (event.remark) {
-
-        addTextElement(
-          item,
-          'timeline-remark',
-          event.remark
-        );
-
+      if (index < currentIndex) {
+        connector.classList.add('completed');
       }
 
-      timeline.appendChild(item);
+      if (index === currentIndex) {
+        connector.classList.add('current');
+      }
 
-    });
+      track.appendChild(connector);
+
+    }
+
+  });
 
 
-    if (!timeline.children.length) {
+  // Keep the active milestone visible on mobile.
+
+  requestAnimationFrame(function() {
+
+    const currentDot = track.querySelector(
+      '.progress-dot.current'
+    );
+
+    if (currentDot) {
+
+      const targetLeft =
+        currentDot.offsetLeft -
+        scroll.clientWidth / 2 +
+        currentDot.offsetWidth / 2;
+
+      scroll.scrollLeft = Math.max(0, targetLeft);
+
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   6. SHIPMENT BUTTON
+========================================================= */
+
+function renderShipmentButton(order) {
+
+  const button = document.getElementById(
+    'shipmentButton'
+  );
+
+  button.style.display = 'none';
+
+  button.removeAttribute('href');
+
+  const status = normaliseStatus(
+    order.order_status
+  );
+
+  const trackingUrl = String(
+    order.tracking_url || ''
+  ).trim();
+
+  if (
+    status !== 'DISPATCHED' &&
+    status !== 'DELIVERED'
+  ) {
+    return;
+  }
+
+  try {
+
+    const parsedUrl = new URL(trackingUrl);
+
+    if (parsedUrl.protocol !== 'https:') {
+      return;
+    }
+
+    button.href = parsedUrl.href;
+
+    button.style.display = 'block';
+
+  } catch (error) {
+
+    return;
+
+  }
+
+}
+
+
+/* =========================================================
+   7. COMPACT ORDER SUMMARY
+========================================================= */
+
+function renderSummary(order, items) {
+
+  document.getElementById(
+    'resultOrderId'
+  ).textContent = safeText(order.order_id);
+
+  document.getElementById(
+    'customerName'
+  ).textContent = safeText(order.customer_name);
+
+  document.getElementById(
+    'orderDate'
+  ).textContent = formatDate(order.created_at);
+
+  document.getElementById(
+    'paymentStatus'
+  ).textContent = safeText(order.payment_status);
+
+  document.getElementById(
+    'orderStatus'
+  ).textContent = safeText(
+    String(order.order_status || '')
+      .replace(/_/g, ' ')
+  );
+
+  document.getElementById(
+    'totalAmount'
+  ).textContent = formatMoney(order.total_amount);
+
+  const totalQuantity = items.reduce(
+    function(total, item) {
+      return total + (Number(item.quantity) || 0);
+    },
+    0
+  );
+
+  document.getElementById(
+    'bookCount'
+  ).textContent =
+    totalQuantity + ' item(s)';
+
+  document.getElementById(
+    'bookSummaryCount'
+  ).textContent =
+    '(' + items.length + ')';
+
+}
+
+
+/* =========================================================
+   8. ORDERED BOOKS
+========================================================= */
+
+function renderBooks(items) {
+
+  const bookList = document.getElementById(
+    'bookList'
+  );
+
+  bookList.replaceChildren();
+
+  items.forEach(function(item) {
+
+    const book = document.createElement('div');
+
+    book.className = 'book-item';
+
+    addTextElement(
+      book,
+      'book-title',
+      item.book_title || item.title
+    );
+
+    addTextElement(
+      book,
+      'book-meta',
+      'Author: ' + safeText(item.author) +
+      ' | Qty: ' + safeText(item.quantity) +
+      ' | Amount: ' + formatMoney(item.line_total)
+    );
+
+    bookList.appendChild(book);
+
+  });
+
+
+  if (!bookList.children.length) {
+
+    addTextElement(
+      bookList,
+      'book-meta',
+      'No book details available.'
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   9. VERTICAL ORDER HISTORY
+========================================================= */
+
+function renderHistory(history) {
+
+  const timeline = document.getElementById(
+    'timeline'
+  );
+
+  timeline.replaceChildren();
+
+  history.forEach(function(event) {
+
+    const item = document.createElement('div');
+
+    item.className = 'timeline-item';
+
+    const dot = document.createElement('div');
+
+    dot.className = 'timeline-dot';
+
+    item.appendChild(dot);
+
+    addTextElement(
+      item,
+      'timeline-status',
+      String(event.new_status || '')
+        .replace(/_/g, ' ')
+    );
+
+    addTextElement(
+      item,
+      'timeline-date',
+      formatDate(event.changed_at)
+    );
+
+    if (event.remark) {
 
       addTextElement(
-        timeline,
+        item,
         'timeline-remark',
-        'No public status updates available yet.'
+        event.remark
       );
 
     }
 
-    results.style.display = 'block';
+    timeline.appendChild(item);
+
+  });
+
+
+  if (!timeline.children.length) {
+
+    addTextElement(
+      timeline,
+      'empty-history',
+      'No public status updates available yet.'
+    );
 
   }
 
+}
 
-  // Order ID-only tracking request.
 
-  async function trackOrder(orderId) {
+/* =========================================================
+   10. RENDER COMPLETE ORDER
+========================================================= */
 
-    trackButton.disabled = true;
+function renderOrder(response) {
 
-    trackButton.textContent = 'CHECKING ORDER...';
+  const data = response.data || response;
 
-    results.style.display = 'none';
+  const order = data.order || data;
+
+  const items = data.items || order.items || [];
+
+  const history = data.history || order.history || [];
+
+  renderProgress(data, order);
+
+  renderShipmentButton(order);
+
+  renderSummary(order, items);
+
+  renderBooks(items);
+
+  renderHistory(history);
+
+  results.style.display = 'block';
+
+}
+
+
+/* =========================================================
+   11. ORDER ID-ONLY API REQUEST
+========================================================= */
+
+async function trackOrder(orderId) {
+
+  trackButton.disabled = true;
+
+  trackButton.textContent = 'CHECKING ORDER...';
+
+  results.style.display = 'none';
+
+  messageBox.className = 'message';
+
+  try {
+
+    const response = await fetch('/api/track', {
+
+      method: 'POST',
+
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify({
+
+        action: 'track',
+
+        order_id: orderId
+
+      })
+
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+
+      throw new Error(
+        result.message ||
+        'Unable to retrieve your order.'
+      );
+
+    }
+
+    renderOrder(result);
 
     messageBox.className = 'message';
 
-    try {
+  } catch (error) {
 
-      const response = await fetch('/api/track', {
+    showMessage(
+      error.message ||
+      'Unable to connect to the tracking service. Please try again.',
+      'error'
+    );
 
-        method: 'POST',
+  } finally {
 
-        headers: {
-          'Content-Type': 'application/json'
-        },
+    trackButton.disabled = false;
 
-        body: JSON.stringify({
-          action: 'track',
-          order_id: orderId
-        })
+    trackButton.textContent = 'TRACK ORDER →';
 
-      });
+  }
 
-      const result = await response.json();
+}
 
-      if (!response.ok || !result.success) {
 
-        throw new Error(
-          result.message ||
-          'Unable to retrieve your order.'
-        );
+/* =========================================================
+   12. FORM SUBMISSION
+========================================================= */
 
-      }
+document.getElementById('trackingForm')
+  .addEventListener('submit', function(event) {
 
-      renderOrder(result);
+    event.preventDefault();
 
-      showMessage(
-        'Your order information has been retrieved successfully.',
-        'success'
-      );
+    const orderId = orderInput.value.trim();
 
-    } catch (error) {
+    if (!orderId) {
 
       showMessage(
-        error.message ||
-        'Unable to connect to the tracking service. Please try again.',
+        'Please enter your Order ID.',
         'error'
       );
 
-    } finally {
-
-      trackButton.disabled = false;
-
-      trackButton.textContent = 'TRACK ORDER →';
+      return;
 
     }
 
-  }
+    trackOrder(orderId);
+
+  });
 
 
-  document.getElementById('trackingForm')
-    .addEventListener('submit', function(event) {
+/* =========================================================
+   13. AUTOMATIC EMAIL LINK TRACKING
+========================================================= */
 
-      event.preventDefault();
+if (urlOrderId) {
 
-      const orderId = orderInput.value.trim();
+  trackOrder(urlOrderId);
 
-      if (!orderId) {
-
-        showMessage(
-          'Please enter your Order ID.',
-          'error'
-        );
-
-        return;
-
-      }
-
-      trackOrder(orderId);
-
-    });
-
-
-  // Automatically track orders opened from email links.
-
-  if (urlOrderId) {
-
-    trackOrder(urlOrderId);
-
-  }
+}
 
 </script>
 
