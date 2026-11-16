@@ -4,7 +4,7 @@
   "compatibility_date": "2026-11-16",
 
   "vars": {
-    "APPS_SCRIPT_URL": "PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE"
+    "APPS_SCRIPT_URL": "https://script.google.com/macros/s/AKfycbw91Dfn7D4WGL-z07nxPdU0gJcqhxpEzUItTaJL87PNBSW69XqcXrcd8kPg1VtECT0/exec"
   },
 
   "assets": {
