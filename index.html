@@ -3,134 +3,273 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#58172d">
+<meta name="theme-color" content="#3e101f">
 <title>Track Your Order | Nakshatra Publishers</title>
+
 <style>
 :root{
-  --maroon:#58172d;
-  --wine:#8c3655;
-  --cream:#f7f4f1;
-  --text:#29252a;
-  --muted:#858085;
-  --border:#eee8eb;
+  --maroon:#3e101f;
+  --wine:#70283f;
+  --wine-light:#f5e9ed;
+  --cream:#faf7f2;
+  --paper:#fffefa;
+  --text:#30272a;
+  --muted:#8c8184;
+  --border:#eee5e6;
   --green:#27834b;
-  --grey:#dedade;
+  --green-soft:#eaf4ed;
+  --gold:#b58a54;
+  --grey:#ded8da;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 body{
-  font-family:Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   background:var(--cream);
   color:var(--text);
   min-height:100vh;
+  -webkit-font-smoothing:antialiased;
 }
-header{
+
+button,input{
+  font:inherit;
+}
+
+/* HEADER */
+
+.site-header{
   background:var(--maroon);
   color:white;
-  padding:19px 15px;
+  padding:23px 16px 21px;
   text-align:center;
+  border-bottom:3px solid var(--gold);
 }
-header h1{font-size:19px;letter-spacing:1px}
-header p{color:#f0dce3;font-size:11px;margin-top:5px}
+
+.brand-mark{
+  font-family:Georgia,serif;
+  font-size:21px;
+  letter-spacing:2.2px;
+  font-weight:600;
+}
+
+.brand-subtitle{
+  margin-top:6px;
+  color:#e8d5da;
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.header-line{
+  width:35px;
+  height:1px;
+  background:var(--gold);
+  margin:13px auto 0;
+}
+
+/* PAGE */
+
 main{
-  max-width:650px;
-  margin:22px auto;
-  padding:0 14px;
+  width:100%;
+  max-width:680px;
+  margin:30px auto;
+  padding:0 16px;
 }
+
 .card{
-  background:white;
-  border-radius:12px;
-  padding:19px;
-  margin-bottom:12px;
-  box-shadow:0 3px 15px rgba(0,0,0,.035);
+  background:var(--paper);
+  border:1px solid var(--border);
+  border-radius:13px;
+  margin-bottom:15px;
+  box-shadow:0 5px 20px rgba(62,16,31,.035);
 }
-.search-card{padding:19px}
-.search-title{font-size:19px;margin-bottom:5px}
+
+/* SEARCH */
+
+.search-card{
+  padding:25px 23px;
+  border-top:3px solid var(--maroon);
+}
+
+.eyebrow{
+  color:var(--gold);
+  font-size:9px;
+  font-weight:bold;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+
+.search-title{
+  font-family:Georgia,serif;
+  font-size:25px;
+  font-weight:500;
+  color:var(--maroon);
+  margin-bottom:7px;
+}
+
 .description{
   color:var(--muted);
   font-size:12px;
-  line-height:1.5;
-  margin-bottom:15px;
+  line-height:1.7;
+  margin-bottom:20px;
 }
+
 label{
   display:block;
-  font-size:11px;
+  color:#62565a;
+  font-size:10px;
   font-weight:bold;
-  margin-bottom:7px;
+  letter-spacing:1px;
+  margin-bottom:8px;
 }
+
+.input-row{
+  display:flex;
+  gap:9px;
+}
+
 input{
-  width:100%;
-  padding:13px;
-  border:1px solid #ded9dc;
-  border-radius:8px;
+  min-width:0;
+  flex:1;
+  padding:14px 13px;
+  border:1px solid #e4dadd;
+  border-radius:7px;
+  background:#fff;
+  color:var(--text);
   font-size:14px;
   outline:none;
-  margin-bottom:10px;
   text-transform:uppercase;
+  transition:border .2s,box-shadow .2s;
 }
-input:focus{border-color:var(--wine)}
-button{cursor:pointer}
+
+input:focus{
+  border-color:var(--wine);
+  box-shadow:0 0 0 3px rgba(112,40,63,.08);
+}
+
 .primary-button{
-  display:block;
-  width:100%;
-  padding:13px;
+  min-width:125px;
+  padding:13px 15px;
   border:0;
-  border-radius:8px;
+  border-radius:7px;
   background:var(--maroon);
   color:white;
-  font-size:13px;
+  font-size:10px;
   font-weight:bold;
+  letter-spacing:.7px;
+  cursor:pointer;
+  transition:background .2s;
 }
-.primary-button:disabled{opacity:.6;cursor:wait}
+
+.primary-button:hover{
+  background:var(--wine);
+}
+
+.primary-button:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
 .message{
   display:none;
-  padding:10px 12px;
+  padding:11px 13px;
   border-radius:7px;
-  margin-top:10px;
+  margin-top:13px;
   font-size:12px;
   line-height:1.5;
 }
-.error{display:block;background:#fff0f0;color:#a32626}
-#results{display:none}
-/* =====================================================
-   PREMIUM HORIZONTAL PROGRESS
-===================================================== */
+
+.error{
+  display:block;
+  background:#fff0f0;
+  color:#a32626;
+  border:1px solid #f4dada;
+}
+
+/* RESULTS */
+
+#results{
+  display:none;
+}
+
+/* SECTION HEADINGS */
+
+.section-heading-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.section-heading{
+  color:var(--maroon);
+  font-family:Georgia,serif;
+  font-size:18px;
+  font-weight:500;
+}
+
+.section-kicker{
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+/* SIX-STEP PROGRESS */
+
 .progress-card{
-  padding:17px 16px 15px;
+  padding:21px 17px 18px;
   overflow:hidden;
 }
+
 .progress-heading{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin-bottom:19px;
+  margin-bottom:25px;
 }
+
 .progress-heading h3{
-  font-size:14px;
-  font-weight:700;
+  color:var(--maroon);
+  font-family:Georgia,serif;
+  font-size:18px;
+  font-weight:500;
 }
-.progress-heading span{
-  font-size:10px;
+
+.progress-caption{
+  background:var(--wine-light);
   color:var(--wine);
-  font-weight:700;
-  background:#f8edf1;
-  padding:5px 9px;
   border-radius:20px;
+  padding:6px 10px;
+  font-size:9px;
+  font-weight:bold;
+  white-space:nowrap;
 }
+
 .progress-scroll{
   width:100%;
   overflow-x:auto;
   overflow-y:hidden;
   scrollbar-width:thin;
-  scrollbar-color:#ddcbd2 transparent;
-  padding:5px 0 8px;
+  scrollbar-color:#d9c6cc transparent;
+  padding:3px 0 10px;
 }
+
 .progress-track{
   display:grid;
   align-items:start;
-  min-width:510px;
-  padding:0 3px;
+  min-width:520px;
+  padding:0 5px;
 }
+
 .progress-step{
   position:relative;
   display:flex;
@@ -139,280 +278,487 @@ button{cursor:pointer}
   text-align:center;
   min-width:0;
 }
-/* Connected line between milestone centres */
+
+/* CONNECTING LINE */
+
 .progress-step:not(:last-child)::after{
   content:"";
   position:absolute;
   z-index:0;
-  top:13px;
+  top:10px;
   left:50%;
   width:100%;
-  height:3px;
-  border-radius:10px;
-  background:#e9e7e9;
-  transition:background .45s ease;
+  height:2px;
+  background:#e5dfe1;
+  transition:background .4s ease;
 }
+
 .progress-step.line-completed::after{
   background:var(--green);
 }
-.progress-step.line-current::after{
-  background:linear-gradient(
-    90deg,
-    var(--maroon) 0%,
-    #e5dce0 100%
-  );
-}
+
+/* MILESTONE CIRCLES */
+
 .progress-dot{
   position:relative;
   z-index:2;
-  width:28px;
-  height:28px;
+  width:22px;
+  height:22px;
   border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#f3f2f3;
-  border:2px solid #dedade;
-  color:#aaa4a8;
-  font-size:11px;
-  font-weight:bold;
-  transition:all .35s ease;
+  background:#f1edef;
+  border:2px solid #dcd5d8;
+  flex-shrink:0;
 }
+
 .progress-dot.completed{
   background:var(--green);
-  border-color:var(--green);
-  color:white;
-  box-shadow:0 2px 6px rgba(39,131,75,.18);
+  border:2px solid var(--green);
 }
+
 .progress-dot.current{
   background:var(--maroon);
   border:2px solid var(--maroon);
-  color:white;
-  box-shadow:0 0 0 4px rgba(140,54,85,.12);
   animation:currentPulse 2s ease-out infinite;
 }
+
 .progress-dot.upcoming{
-  opacity:.48;
-  background:#f4f3f4;
-  border-color:#dedade;
+  background:#f3f0f1;
+  border:2px solid #ded8da;
+  opacity:.7;
 }
+
 @keyframes currentPulse{
-  0%{box-shadow:0 0 0 3px rgba(140,54,85,.15)}
-  65%{box-shadow:0 0 0 8px rgba(140,54,85,0)}
-  100%{box-shadow:0 0 0 3px rgba(140,54,85,0)}
+  0%{
+    box-shadow:0 0 0 3px rgba(112,40,63,.13);
+  }
+  65%{
+    box-shadow:0 0 0 8px rgba(112,40,63,0);
+  }
+  100%{
+    box-shadow:0 0 0 3px rgba(112,40,63,0);
+  }
 }
+
 .progress-label{
-  margin-top:9px;
-  max-width:75px;
+  margin-top:12px;
+  max-width:78px;
   font-size:9px;
-  line-height:1.3;
-  color:#aaa4a8;
+  line-height:1.4;
+  color:#a69da0;
   font-weight:500;
   overflow-wrap:anywhere;
-  transition:all .3s ease;
 }
+
 .progress-label.completed{
   color:var(--green);
-  font-weight:700;
+  font-weight:bold;
 }
+
 .progress-label.current{
   color:var(--maroon);
-  font-weight:800;
+  font-weight:bold;
 }
-.progress-label.upcoming{opacity:.52}
+
+.progress-label.upcoming{
+  opacity:.65;
+}
+
 .progress-cancelled{
   background:#fff0f0;
   border:1px solid #f3caca;
   color:#a32626;
-  padding:11px;
+  padding:13px;
   border-radius:8px;
   font-size:12px;
   font-weight:bold;
   text-align:center;
 }
-/* Respect reduced-motion preferences */
-@media(prefers-reduced-motion:reduce){
-  .progress-dot.current{animation:none}
-  .progress-dot,.progress-label,.progress-step::after{transition:none}
-}
-/* SHIPMENT BUTTON - UNCHANGED POSITION */
+
+/* SHIPMENT BUTTON */
+
 .shipment-button{
   display:none;
   width:100%;
-  margin-top:14px;
-  padding:13px;
+  margin-top:17px;
+  padding:14px;
   background:#267747;
   color:white;
   text-align:center;
-  border-radius:8px;
+  border-radius:7px;
   text-decoration:none;
-  font-size:13px;
+  font-size:11px;
   font-weight:bold;
+  letter-spacing:.7px;
+  transition:background .2s;
 }
+
+.shipment-button:hover{
+  background:#1e6039;
+}
+
 /* ORDER SUMMARY */
-.summary-card{padding:17px}
+
+.summary-card{
+  padding:21px;
+}
+
 .summary-top{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
-  padding-bottom:12px;
+  gap:12px;
+  padding-bottom:16px;
   border-bottom:1px solid var(--border);
-  margin-bottom:12px;
+  margin-bottom:18px;
 }
-.summary-top h3{font-size:15px}
+
+.summary-top h3{
+  color:var(--maroon);
+  font-family:Georgia,serif;
+  font-size:18px;
+  font-weight:500;
+}
+
 .order-id{
   color:var(--wine);
-  font-size:11px;
+  font-size:10px;
   font-weight:bold;
-  margin-top:4px;
+  margin-top:6px;
+  letter-spacing:.5px;
   overflow-wrap:anywhere;
 }
+
 .status-badge{
-  background:#f5e8ed;
+  background:var(--wine-light);
   color:var(--maroon);
+  border:1px solid #ead7de;
   border-radius:20px;
-  padding:6px 9px;
+  padding:7px 11px;
   font-size:9px;
   font-weight:bold;
   white-space:nowrap;
+  text-align:center;
 }
+
 .summary-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:13px 10px;
+  gap:20px 15px;
 }
-.summary-item{min-width:0}
+
+.summary-item{
+  min-width:0;
+}
+
 .summary-label{
   color:var(--muted);
   font-size:9px;
   text-transform:uppercase;
-  margin-bottom:4px;
+  letter-spacing:1px;
+  margin-bottom:7px;
 }
+
 .summary-value{
+  color:var(--text);
   font-size:12px;
   font-weight:bold;
+  line-height:1.5;
   overflow-wrap:anywhere;
 }
+
 .total-row{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-top:14px;
-  padding-top:12px;
+  margin-top:20px;
+  padding-top:16px;
   border-top:1px solid var(--border);
-  font-size:13px;
+  font-size:12px;
   font-weight:bold;
 }
-.total-row strong{color:var(--maroon);font-size:16px}
+
+.total-row strong{
+  color:var(--maroon);
+  font-family:Georgia,serif;
+  font-size:19px;
+}
+
 /* ORDERED BOOKS */
-.books-card{padding:0;overflow:hidden}
+
+.books-card{
+  overflow:hidden;
+}
+
 .books-card summary{
   list-style:none;
-  padding:15px 17px;
-  font-size:13px;
+  padding:18px 20px;
+  color:var(--maroon);
+  font-size:12px;
   font-weight:bold;
   cursor:pointer;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  min-height:55px;
 }
-.books-card summary::-webkit-details-marker{display:none}
-.books-card summary::after{content:'+';font-size:18px;color:var(--maroon)}
-.books-card[open] summary::after{content:'−'}
-.book-list{padding:0 17px 10px}
+
+.books-card summary::-webkit-details-marker{
+  display:none;
+}
+
+.books-card summary::after{
+  content:"+";
+  color:var(--gold);
+  font-size:20px;
+  font-weight:400;
+}
+
+.books-card[open] summary::after{
+  content:"−";
+}
+
+.book-list{
+  padding:0 20px 13px;
+}
+
 .book-item{
-  padding:11px 0;
+  padding:13px 0;
   border-top:1px solid var(--border);
 }
-.book-title{font-size:12px;font-weight:bold;line-height:1.4}
+
+.book-title{
+  color:var(--text);
+  font-size:12px;
+  font-weight:bold;
+  line-height:1.5;
+}
+
 .book-meta{
   font-size:10px;
   color:var(--muted);
-  margin-top:4px;
-  line-height:1.5;
+  margin-top:5px;
+  line-height:1.6;
 }
-/* VERTICAL ORDER HISTORY - UNCHANGED */
-.history-card{padding:18px}
-.section-heading{font-size:14px;margin-bottom:16px}
-.timeline{padding-left:7px}
+
+/* ORDER ACTIVITY */
+
+.history-card{
+  padding:21px;
+}
+
+.history-intro{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.6;
+  margin-top:-11px;
+  margin-bottom:20px;
+}
+
+.timeline{
+  padding-left:5px;
+}
+
 .timeline-item{
   position:relative;
-  padding:0 0 17px 22px;
-  border-left:2px solid #e7dce0;
+  padding:0 0 21px 25px;
+  border-left:1px solid #e7dce0;
+  margin-left:5px;
 }
+
 .timeline-item:last-child{
   border-left-color:transparent;
   padding-bottom:0;
 }
+
 .timeline-dot{
   position:absolute;
-  left:-6px;
-  top:1px;
-  width:10px;
-  height:10px;
+  left:-5px;
+  top:2px;
+  width:9px;
+  height:9px;
   border-radius:50%;
   background:var(--wine);
-  border:2px solid white;
+  border:2px solid var(--paper);
   box-shadow:0 0 0 1px var(--wine);
 }
-.timeline-status{font-size:12px;font-weight:bold;line-height:1.4}
-.timeline-date{font-size:10px;color:#999;margin-top:4px}
-.timeline-remark{
-  font-size:11px;
-  color:#666;
-  margin-top:5px;
+
+.timeline-status{
+  color:var(--maroon);
+  font-size:12px;
+  font-weight:bold;
   line-height:1.5;
+  text-transform:capitalize;
 }
-.empty-history{font-size:11px;color:var(--muted)}
-footer{
-  text-align:center;
-  padding:18px 12px;
-  color:#999;
+
+.timeline-date{
+  color:#9b9094;
   font-size:10px;
+  margin-top:5px;
 }
-@media(max-width:420px){
-  main{margin-top:14px;padding:0 10px}
-  .card{border-radius:10px}
-  .progress-track{min-width:510px}
-  .progress-label{font-size:8px}
+
+.timeline-remark{
+  color:#756b6e;
+  font-size:11px;
+  margin-top:7px;
+  line-height:1.6;
+  overflow-wrap:anywhere;
+}
+
+.empty-history{
+  color:var(--muted);
+  font-size:11px;
+  padding:5px 0;
+}
+
+/* FOOTER */
+
+.site-footer{
+  text-align:center;
+  padding:22px 12px 26px;
+  color:#9a8e92;
+  font-size:10px;
+  line-height:1.7;
+}
+
+.footer-brand{
+  color:var(--maroon);
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:480px){
+  main{
+    margin:18px auto;
+    padding:0 11px;
+  }
+
+  .site-header{
+    padding:20px 12px 18px;
+  }
+
+  .brand-mark{
+    font-size:19px;
+  }
+
+  .search-card{
+    padding:21px 17px;
+  }
+
+  .search-title{
+    font-size:23px;
+  }
+
+  .input-row{
+    flex-direction:column;
+  }
+
+  .primary-button{
+    width:100%;
+    min-height:45px;
+  }
+
+  .progress-card{
+    padding:19px 13px 16px;
+  }
+
+  .progress-track{
+    min-width:500px;
+  }
+
+  .summary-card,
+  .history-card{
+    padding:18px;
+  }
+
+  .summary-grid{
+    gap:17px 10px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition:none!important;
+  }
 }
 </style>
 </head>
+
 <body>
-<header>
-  <h1>NAKSHATRA PUBLISHERS</h1>
-  <p>Official Order Tracking Portal</p>
+
+<header class="site-header">
+  <div class="brand-mark">NAKSHATRA</div>
+  <div class="brand-subtitle">Publishers & Literary House</div>
+  <div class="header-line"></div>
 </header>
+
 <main>
+
 <section class="card search-card">
+  <div class="eyebrow">Customer Service · Order Tracking</div>
   <h2 class="search-title">Track Your Order</h2>
-  <p class="description">Enter your Order ID to view the latest order status.</p>
+  <p class="description">
+    Follow the journey of your book, from order confirmation to final delivery.
+    Enter your Order ID below to view the latest updates.
+  </p>
+
   <form id="trackingForm">
-    <label for="orderId">ORDER ID</label>
-    <input type="text" id="orderId" placeholder="NKORD20260001" autocomplete="off" required>
-    <button type="submit" class="primary-button" id="trackButton">TRACK ORDER →</button>
+    <label for="orderId">YOUR ORDER ID</label>
+
+    <div class="input-row">
+      <input
+        type="text"
+        id="orderId"
+        placeholder="NKORD20260001"
+        autocomplete="off"
+        required
+      >
+      <button type="submit" class="primary-button" id="trackButton">
+        TRACK ORDER →
+      </button>
+    </div>
   </form>
+
   <div id="message" class="message" role="alert" aria-live="polite"></div>
 </section>
+
 <section id="results">
+
   <!-- ORDER PROGRESS -->
+
   <section class="card progress-card">
     <div class="progress-heading">
       <h3>Order Progress</h3>
-      <span id="progressCaption">Live status</span>
+      <span class="progress-caption" id="progressCaption">Live status</span>
     </div>
+
     <div id="progressCancelled" class="progress-cancelled" hidden>
       This order has been cancelled.
     </div>
+
     <div id="progressScroll" class="progress-scroll">
       <div id="progressTrack" class="progress-track"></div>
     </div>
-    <a id="shipmentButton" class="shipment-button" href="#" target="_blank" rel="noopener noreferrer">
-      ↗ TRACK SHIPMENT
+
+    <a
+      id="shipmentButton"
+      class="shipment-button"
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      ↗ &nbsp; TRACK SHIPMENT
     </a>
   </section>
+
   <!-- ORDER SUMMARY -->
+
   <section class="card summary-card">
     <div class="summary-top">
       <div>
@@ -421,78 +767,142 @@ footer{
       </div>
       <span class="status-badge" id="orderStatus">—</span>
     </div>
+
     <div class="summary-grid">
       <div class="summary-item">
         <div class="summary-label">Customer</div>
         <div class="summary-value" id="customerName">—</div>
       </div>
+
       <div class="summary-item">
         <div class="summary-label">Order Date</div>
         <div class="summary-value" id="orderDate">—</div>
       </div>
+
       <div class="summary-item">
         <div class="summary-label">Payment</div>
         <div class="summary-value" id="paymentStatus">—</div>
       </div>
+
       <div class="summary-item">
         <div class="summary-label">Books</div>
         <div class="summary-value" id="bookCount">—</div>
       </div>
     </div>
+
     <div class="total-row">
       <span>Total Amount</span>
       <strong id="totalAmount">—</strong>
     </div>
   </section>
+
   <!-- ORDERED BOOKS -->
+
   <details class="card books-card">
-    <summary>Ordered Books <span id="bookSummaryCount"></span></summary>
+    <summary>
+      Ordered Books
+      <span id="bookSummaryCount"></span>
+    </summary>
     <div id="bookList" class="book-list"></div>
   </details>
+
   <!-- ORDER ACTIVITY -->
+
   <section class="card history-card">
-    <h3 class="section-heading">Order Activity</h3>
+    <div class="section-heading-row">
+      <h3 class="section-heading">Order Activity</h3>
+      <span class="section-kicker">Status history</span>
+    </div>
+
+    <p class="history-intro">
+      Follow the individual updates and progress recorded for your order.
+    </p>
+
     <div id="timeline" class="timeline"></div>
   </section>
+
 </section>
+
 </main>
-<footer>© Nakshatra Publishers. All rights reserved.</footer>
+
+<footer class="site-footer">
+  <div class="footer-brand">NAKSHATRA PUBLISHERS</div>
+  <div>© Nakshatra Publishers. All rights reserved.</div>
+</footer>
+
 <script>
+
 /* ELEMENTS AND URL */
-const params=new URLSearchParams(window.location.search);
-const orderInput=document.getElementById('orderId');
-const messageBox=document.getElementById('message');
-const results=document.getElementById('results');
-const trackButton=document.getElementById('trackButton');
-const urlOrderId=params.get('order_id');
-if(urlOrderId)orderInput.value=urlOrderId;
-/* ORDER STATUS CONFIGURATION */
-const IN_STOCK_STEPS=[
-  {key:'ORDER_RECEIVED',label:'Received'},
+
+const params = new URLSearchParams(window.location.search);
+
+const orderInput = document.getElementById('orderId');
+const messageBox = document.getElementById('message');
+const results = document.getElementById('results');
+const trackButton = document.getElementById('trackButton');
+
+const urlOrderId = params.get('order_id');
+
+if(urlOrderId){
+  orderInput.value = urlOrderId;
+}
+
+/* FIXED SIX-STAGE TIMELINE */
+
+const ORDER_STEPS = [
+  {key:'ORDER_RECEIVED',label:'Order Received'},
   {key:'PAYMENT_CONFIRMED',label:'Confirmed'},
   {key:'PROCESSING',label:'Processing'},
-  {key:'READY_TO_SHIP',label:'Ready'},
+  {key:'READY_TO_SHIP',label:'Ready to Ship'},
   {key:'DISPATCHED',label:'Dispatched'},
   {key:'DELIVERED',label:'Delivered'}
 ];
-const PRINT_STEPS=[
-  {key:'ORDER_RECEIVED',label:'Received'},
-  {key:'PAYMENT_CONFIRMED',label:'Confirmed'},
-  {key:'SENT_TO_PRESS',label:'Sent to Press'},
-  {key:'PRINTING_IN_PROGRESS',label:'Printing'},
-  {key:'RECEIVED_AT_NAKSHATRA',label:'Received'},
-  {key:'READY_TO_SHIP',label:'Ready'},
-  {key:'DISPATCHED',label:'Dispatched'},
-  {key:'DELIVERED',label:'Delivered'}
-];
+
+/*
+  Every intermediate status maps to one of the
+  six fixed milestones.
+
+  Intermediate statuses never create new steps.
+*/
+
+const STATUS_TO_STEP = {
+
+  ORDER_RECEIVED:0,
+  PAYMENT_PENDING:0,
+
+  PAYMENT_CONFIRMED:1,
+
+  PROCESSING:2,
+  SENT_TO_PRESS:2,
+  PRINTING_IN_PROGRESS:2,
+  RECEIVED_AT_NAKSHATRA:2,
+
+  READY_TO_SHIP:3,
+
+  DISPATCHED:4,
+
+  DELIVERED:5
+};
+
 /* FORMATTING HELPERS */
+
 function safeText(value){
-  return value===null||value===undefined||value===''?'—':String(value);
+  return value===null ||
+         value===undefined ||
+         value===''
+    ? '—'
+    : String(value);
 }
+
 function formatDate(value){
-  if(!value)return '—';
-  const date=new Date(value);
-  if(isNaN(date.getTime()))return String(value);
+  if(!value) return '—';
+
+  const date = new Date(value);
+
+  if(isNaN(date.getTime())){
+    return String(value);
+  }
+
   return date.toLocaleString('en-IN',{
     day:'2-digit',
     month:'short',
@@ -501,178 +911,272 @@ function formatDate(value){
     minute:'2-digit'
   });
 }
+
 function formatMoney(value){
-  if(value===null||value===undefined||value==='')return '—';
-  return Number(value).toLocaleString('en-IN',{
+  if(value===null ||
+     value===undefined ||
+     value===''){
+    return '—';
+  }
+
+  const amount = Number(value);
+
+  if(!Number.isFinite(amount)){
+    return '—';
+  }
+
+  return amount.toLocaleString('en-IN',{
     style:'currency',
     currency:'INR'
   });
 }
+
 function addTextElement(parent,className,value){
-  const element=document.createElement('div');
-  if(className)element.className=className;
-  element.textContent=safeText(value);
+  const element = document.createElement('div');
+
+  if(className){
+    element.className = className;
+  }
+
+  element.textContent = safeText(value);
+
   parent.appendChild(element);
+
   return element;
 }
+
 function showMessage(text,type){
-  messageBox.textContent=text;
-  messageBox.className='message '+type;
+  messageBox.textContent = text;
+  messageBox.className = 'message '+type;
 }
+
 /* STATUS NORMALISATION */
+
 function normaliseStatus(status){
   return String(status||'')
     .trim()
     .toUpperCase()
     .replace(/[\s-]+/g,'_');
 }
-function getOrderSteps(data,order){
-  const items=data.items||[];
-  const isPrintOrder=items.some(function(item){
-    return normaliseStatus(item.fulfilment_type)==='PRINT_ON_DEMAND';
-  });
-  return isPrintOrder?PRINT_STEPS:IN_STOCK_STEPS;
-}
-function getCurrentStepIndex(status,steps){
-  const currentStatus=normaliseStatus(status);
-  if(
-    currentStatus==='ORDER_RECEIVED'||
-    currentStatus==='PAYMENT_PENDING'
-  ){
-    return 0;
+
+/* FIXED TIMELINE INDEX */
+
+function getCurrentStepIndex(status){
+
+  const currentStatus = normaliseStatus(status);
+
+  if(currentStatus==='CANCELLED'){
+    return -1;
   }
-  if(currentStatus==='PAYMENT_CONFIRMED'){
-    return 1;
+
+  if(Object.prototype.hasOwnProperty.call(
+    STATUS_TO_STEP,
+    currentStatus
+  )){
+    return STATUS_TO_STEP[currentStatus];
   }
-  const index=steps.findIndex(function(step){
-    return step.key===currentStatus;
-  });
-  if(index!==-1)return index;
-  if(currentStatus==='CANCELLED')return -1;
+
   return 0;
 }
-/* =====================================================
-   PREMIUM HORIZONTAL PROGRESS RENDERER
-===================================================== */
+
+/* SIX-STAGE PROGRESS RENDERER */
+
 function renderProgress(data,order){
-  const track=document.getElementById('progressTrack');
-  const scroll=document.getElementById('progressScroll');
-  const cancelled=document.getElementById('progressCancelled');
-  const caption=document.getElementById('progressCaption');
-  const status=normaliseStatus(order.order_status);
+
+  const track = document.getElementById('progressTrack');
+  const scroll = document.getElementById('progressScroll');
+  const cancelled = document.getElementById('progressCancelled');
+  const caption = document.getElementById('progressCaption');
+
+  const status = normaliseStatus(order.order_status);
+
   track.replaceChildren();
-  const isCancelled=status==='CANCELLED';
-  cancelled.hidden=!isCancelled;
-  scroll.style.display=isCancelled?'none':'block';
+
+  const isCancelled = status==='CANCELLED';
+
+  cancelled.hidden = !isCancelled;
+  scroll.style.display = isCancelled ? 'none' : 'block';
+
   if(isCancelled){
-    caption.textContent='Cancelled';
+    caption.textContent = 'Cancelled';
     return;
   }
-  const steps=getOrderSteps(data,order);
-  const currentIndex=getCurrentStepIndex(status,steps);
-  caption.textContent=
-    currentIndex>=0
-      ?'● '+steps[currentIndex].label+' in progress'
-      :'Order progress';
-  /*
-    Equal-width grid columns keep every milestone aligned.
-    The connector is drawn behind the next milestone dot.
-  */
-  track.style.gridTemplateColumns='repeat('+steps.length+', minmax(0,1fr))';
-  steps.forEach(function(step,index){
-    const isCompleted=index<currentIndex;
-    const isCurrent=index===currentIndex;
-    const isUpcoming=index>currentIndex;
-    const stepElement=document.createElement('div');
-    stepElement.className='progress-step';
-    if(index<steps.length-1){
-      if(isCompleted){
-        stepElement.classList.add('line-completed');
-      }else if(isCurrent){
-        stepElement.classList.add('line-current');
-      }
+
+  const currentIndex = getCurrentStepIndex(status);
+
+  caption.textContent =
+    ORDER_STEPS[currentIndex].label+' in progress';
+
+  track.style.gridTemplateColumns =
+    'repeat(6,minmax(0,1fr))';
+
+  ORDER_STEPS.forEach(function(step,index){
+
+    const isCompleted = index < currentIndex;
+    const isCurrent = index === currentIndex;
+    const isUpcoming = index > currentIndex;
+
+    const stepElement = document.createElement('div');
+
+    stepElement.className = 'progress-step';
+
+    if(index < ORDER_STEPS.length-1 && isCompleted){
+      stepElement.classList.add('line-completed');
     }
-    const dot=document.createElement('div');
-    dot.className='progress-dot';
+
+    const dot = document.createElement('div');
+
+    dot.className = 'progress-dot';
+
+    /*
+      Completed: solid green circle.
+      Current: solid maroon pulsing circle.
+      Upcoming: faded grey outlined circle.
+
+      No ticks, numbers or icons.
+    */
+
     if(isCompleted){
       dot.classList.add('completed');
-      dot.textContent='✓';
-    }else if(isCurrent){
-      dot.classList.add('current');
-      dot.textContent='•';
-    }else{
-      dot.classList.add('upcoming');
-      dot.textContent='';
+      dot.setAttribute('aria-label','Completed');
     }
-    dot.setAttribute('aria-label',
-      isCompleted?'Completed':
-      isCurrent?'Current status':'Upcoming status'
-    );
-    const label=document.createElement('div');
-    label.className='progress-label';
-    if(isCompleted)label.classList.add('completed');
-    if(isCurrent)label.classList.add('current');
-    if(isUpcoming)label.classList.add('upcoming');
-    label.textContent=step.label;
+    else if(isCurrent){
+      dot.classList.add('current');
+      dot.setAttribute('aria-label','Current stage');
+    }
+    else{
+      dot.classList.add('upcoming');
+      dot.setAttribute('aria-label','Upcoming');
+    }
+
+    const label = document.createElement('div');
+
+    label.className = 'progress-label';
+    label.textContent = step.label;
+
+    if(isCompleted){
+      label.classList.add('completed');
+    }
+    else if(isCurrent){
+      label.classList.add('current');
+    }
+    else if(isUpcoming){
+      label.classList.add('upcoming');
+    }
+
     stepElement.appendChild(dot);
     stepElement.appendChild(label);
+
     track.appendChild(stepElement);
+
   });
+
   /*
-    Centre the active milestone in the scroll area.
-    The rest of the page and shipment button are unaffected.
+    Keep the active stage visible on smaller screens.
   */
+
   requestAnimationFrame(function(){
-    const currentDot=track.querySelector('.progress-dot.current');
+
+    const currentDot = track.querySelector('.progress-dot.current');
+
     if(currentDot){
-      const targetLeft=
-        currentDot.offsetLeft-
-        scroll.clientWidth/2+
+
+      const targetLeft =
+        currentDot.offsetLeft -
+        scroll.clientWidth/2 +
         currentDot.offsetWidth/2;
-      scroll.scrollLeft=Math.max(0,targetLeft);
+
+      scroll.scrollLeft = Math.max(0,targetLeft);
     }
+
   });
 }
+
 /* SHIPMENT BUTTON */
+
 function renderShipmentButton(order){
-  const button=document.getElementById('shipmentButton');
-  button.style.display='none';
+
+  const button = document.getElementById('shipmentButton');
+
+  button.style.display = 'none';
   button.removeAttribute('href');
-  const status=normaliseStatus(order.order_status);
-  const trackingUrl=String(order.tracking_url||'').trim();
-  if(status!=='DISPATCHED'&&status!=='DELIVERED')return;
+
+  const status = normaliseStatus(order.order_status);
+  const trackingUrl = String(order.tracking_url||'').trim();
+
+  if(status!=='DISPATCHED' && status!=='DELIVERED'){
+    return;
+  }
+
   try{
-    const parsedUrl=new URL(trackingUrl);
-    if(parsedUrl.protocol!=='https:')return;
-    button.href=parsedUrl.href;
-    button.style.display='block';
+
+    const parsedUrl = new URL(trackingUrl);
+
+    if(parsedUrl.protocol!=='https:'){
+      return;
+    }
+
+    button.href = parsedUrl.href;
+    button.style.display = 'block';
+
   }catch(error){
     return;
   }
 }
+
 /* ORDER SUMMARY */
+
 function renderSummary(order,items){
-  document.getElementById('resultOrderId').textContent=safeText(order.order_id);
-  document.getElementById('customerName').textContent=safeText(order.customer_name);
-  document.getElementById('orderDate').textContent=formatDate(order.created_at);
-  document.getElementById('paymentStatus').textContent=safeText(order.payment_status);
-  document.getElementById('orderStatus').textContent=
+
+  document.getElementById('resultOrderId').textContent =
+    safeText(order.order_id);
+
+  document.getElementById('customerName').textContent =
+    safeText(order.customer_name);
+
+  document.getElementById('orderDate').textContent =
+    formatDate(order.created_at);
+
+  document.getElementById('paymentStatus').textContent =
+    safeText(order.payment_status);
+
+  document.getElementById('orderStatus').textContent =
     safeText(String(order.order_status||'').replace(/_/g,' '));
-  document.getElementById('totalAmount').textContent=formatMoney(order.total_amount);
-  const totalQuantity=items.reduce(function(total,item){
+
+  document.getElementById('totalAmount').textContent =
+    formatMoney(order.total_amount);
+
+  const totalQuantity = items.reduce(function(total,item){
     return total+(Number(item.quantity)||0);
   },0);
-  document.getElementById('bookCount').textContent=totalQuantity+' item(s)';
-  document.getElementById('bookSummaryCount').textContent='('+items.length+')';
+
+  document.getElementById('bookCount').textContent =
+    totalQuantity+' item(s)';
+
+  document.getElementById('bookSummaryCount').textContent =
+    '('+items.length+')';
 }
+
 /* ORDERED BOOKS */
+
 function renderBooks(items){
-  const bookList=document.getElementById('bookList');
+
+  const bookList = document.getElementById('bookList');
+
   bookList.replaceChildren();
+
   items.forEach(function(item){
-    const book=document.createElement('div');
-    book.className='book-item';
-    addTextElement(book,'book-title',item.book_title||item.title);
+
+    const book = document.createElement('div');
+
+    book.className = 'book-item';
+
+    addTextElement(
+      book,
+      'book-title',
+      item.book_title||item.title
+    );
+
     addTextElement(
       book,
       'book-meta',
@@ -680,105 +1184,193 @@ function renderBooks(items){
       ' | Qty: '+safeText(item.quantity)+
       ' | Amount: '+formatMoney(item.line_total)
     );
+
     bookList.appendChild(book);
+
   });
+
   if(!bookList.children.length){
-    addTextElement(bookList,'book-meta','No book details available.');
+
+    addTextElement(
+      bookList,
+      'book-meta',
+      'No book details available.'
+    );
+
   }
 }
-/* VERTICAL ORDER HISTORY */
+
+/* ORDER ACTIVITY */
+
 function renderHistory(history){
-  const timeline=document.getElementById('timeline');
+
+  const timeline = document.getElementById('timeline');
+
   timeline.replaceChildren();
+
+  /*
+    Preserve the order returned by the API.
+    No client-side status reconstruction is performed.
+  */
+
   history.forEach(function(event){
-    const item=document.createElement('div');
-    item.className='timeline-item';
-    const dot=document.createElement('div');
-    dot.className='timeline-dot';
+
+    const item = document.createElement('div');
+
+    item.className = 'timeline-item';
+
+    const dot = document.createElement('div');
+
+    dot.className = 'timeline-dot';
+
     item.appendChild(dot);
+
     addTextElement(
       item,
       'timeline-status',
       String(event.new_status||'').replace(/_/g,' ')
     );
+
     addTextElement(
       item,
       'timeline-date',
       formatDate(event.changed_at)
     );
+
     if(event.remark){
-      addTextElement(item,'timeline-remark',event.remark);
+
+      addTextElement(
+        item,
+        'timeline-remark',
+        event.remark
+      );
+
     }
+
     timeline.appendChild(item);
+
   });
+
   if(!timeline.children.length){
+
     addTextElement(
       timeline,
       'empty-history',
       'No public status updates available yet.'
     );
+
   }
 }
+
 /* RENDER COMPLETE ORDER */
+
 function renderOrder(response){
-  const data=response.data||response;
-  const order=data.order||data;
-  const items=data.items||order.items||[];
-  const history=data.history||order.history||[];
+
+  const data = response.data||response;
+
+  const order = data.order||data;
+
+  const items = data.items||order.items||[];
+
+  const history = data.history||order.history||[];
+
   renderProgress(data,order);
+
   renderShipmentButton(order);
+
   renderSummary(order,items);
+
   renderBooks(items);
+
   renderHistory(history);
-  results.style.display='block';
+
+  results.style.display = 'block';
 }
+
 /* ORDER TRACKING API */
+
 async function trackOrder(orderId){
-  trackButton.disabled=true;
-  trackButton.textContent='CHECKING ORDER...';
-  results.style.display='none';
-  messageBox.className='message';
+
+  trackButton.disabled = true;
+  trackButton.textContent = 'CHECKING...';
+
+  results.style.display = 'none';
+
+  messageBox.className = 'message';
+
   try{
-    const response=await fetch('/api/track',{
+
+    const response = await fetch('/api/track',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{
+        'Content-Type':'application/json'
+      },
       body:JSON.stringify({
         action:'track',
         order_id:orderId
       })
     });
-    const result=await response.json();
-    if(!response.ok||!result.success){
-      throw new Error(result.message||'Unable to retrieve your order.');
+
+    const result = await response.json();
+
+    if(!response.ok || !result.success){
+
+      throw new Error(
+        result.message||'Unable to retrieve your order.'
+      );
+
     }
+
     renderOrder(result);
-    messageBox.className='message';
+
+    messageBox.className = 'message';
+
   }catch(error){
+
     showMessage(
       error.message||
       'Unable to connect to the tracking service. Please try again.',
       'error'
     );
+
   }finally{
-    trackButton.disabled=false;
-    trackButton.textContent='TRACK ORDER →';
+
+    trackButton.disabled = false;
+    trackButton.textContent = 'TRACK ORDER →';
+
   }
 }
+
 /* FORM SUBMISSION */
+
 document.getElementById('trackingForm')
   .addEventListener('submit',function(event){
+
     event.preventDefault();
-    const orderId=orderInput.value.trim();
+
+    const orderId = orderInput.value.trim();
+
     if(!orderId){
-      showMessage('Please enter your Order ID.','error');
+
+      showMessage(
+        'Please enter your Order ID.',
+        'error'
+      );
+
       return;
     }
+
     trackOrder(orderId);
+
   });
+
 /* AUTOMATIC EMAIL LINK TRACKING */
+
 if(urlOrderId){
   trackOrder(urlOrderId);
 }
+
 </script>
+
 </body>
 </html>
